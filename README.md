@@ -1,16 +1,14 @@
-<p style="text-align:center;">
+<p align="center">
     <img src="./artworks/WinFormiumLogo.png" width="144" />
 </p>
-<h1 style="text-align:center;">The WinFormium Project</h1>
-<p style="text-align:center; color: #666; font-weight:700;">Easily buid powerful WinForm applications with HTML, CSS and JavaScript.</p>
-
+<h1 align="center">The WinFormium Project</h1>
+<p align="center"><strong>Easily buid powerful WinForm applications with HTML, CSS and JavaScript.<strong></p>
 
 # WinFormium
 
 ![GitHub](https://img.shields.io/github/license/XuanchenLin/WinFormium)
 ![Nuget](https://img.shields.io/nuget/v/WinFormium)
 ![Nuget](https://img.shields.io/nuget/dt/WinFormium)
-
 
 English | [简体中文](README.zh-Hans.md)
 
@@ -22,26 +20,25 @@ If you are looking for a framework for creating a WinForm application with a mod
 
 **Please give WinFormium project a star⭐ if you like it.**
 
-If this project helps, please consider funding it. 
+If this project helps, please consider funding it.
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/mrjson?country.x=C2&locale.x=zh_XC)
 
 ## 🖥️ Requirements
 
-
 **For Development**
 
-* .NET Framework 4.6.2 or higher / .NET 6.0 or higher
-* Visual Studio 2019 or higher (VS2022 is recommended)
+- .NET Framework 4.6.2 or higher / .NET 6.0 or higher
+- Visual Studio 2019 or higher (VS2022 is recommended)
 
 **For Deployment**
 
-* Microsoft Windows 7 Service Pack 1 or higher
-* .Net Framework 4.6.2 or higher 
-* .NET 6.0 for Windows 7 and higher.
-* .NET 7.0/8.0 for Windows 10 and higher.
+- Microsoft Windows 7 Service Pack 1 or higher
+- .Net Framework 4.6.2 or higher
+- .NET 6.0 for Windows 7 and higher.
+- .NET 7.0/8.0 for Windows 10 and higher.
 
-This is a **Windows Only** framework, it can not run on Linux or Mac OS. 
+This is a **Windows Only** framework, it can not run on Linux or Mac OS.
 
 The minimum supported Windows is Windows 7 Service Pack 1, and some features (such as DirectComposition Offscreen Rendering) are not supported on Windows 7.
 
@@ -155,19 +152,18 @@ For more info please see - [Documentation](docs/en/Documentation.md) or [Wiki](h
 
 ## 🤖 Demos
 
-* [Minimal WinFormium App](./examples/MinimalWinFormiumApp) - Introduction to the basic usage of WinFormium.
+- [Minimal WinFormium App](./examples/MinimalWinFormiumApp) - Introduction to the basic usage of WinFormium.
 
 ## 🔗 Third-Party References & Tools
 
-* CEF - [https://bitbucket.org/chromiumembedded/cef]()
-* Xilium.CefGlue - [https://gitlab.com/xiliumhq/chromiumembedded/cefglue/]()
-* Vanara.Library - [https://github.com/dahall/Vanara/]()
-* Vortice.Windows - [https://github.com/amerkoleci/Vortice.Windows]()
-* SkiaSharp - [https://github.com/mono/SkiaSharp]()
-* React - [https://github.com/facebook/react]()
-* React-Router - [https://github.com/remix-run/react-router]()
-* Vite - [https://github.com/vitejs/vite]()
-
+- CEF - [https://bitbucket.org/chromiumembedded/cef]()
+- Xilium.CefGlue - [https://gitlab.com/xiliumhq/chromiumembedded/cefglue/]()
+- Vanara.Library - [https://github.com/dahall/Vanara/]()
+- Vortice.Windows - [https://github.com/amerkoleci/Vortice.Windows]()
+- SkiaSharp - [https://github.com/mono/SkiaSharp]()
+- React - [https://github.com/facebook/react]()
+- React-Router - [https://github.com/remix-run/react-router]()
+- Vite - [https://github.com/vitejs/vite]()
 
 ## 🏆 Inspirations
 
