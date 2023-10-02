@@ -1,3 +1,10 @@
+<p style="text-align:center;">
+    <img src="./artworks/WinFormiumLogo.png" width="144" />
+</p>
+<h1 style="text-align:center;">The WinFormium Project</h1>
+<p style="text-align:center; color: #666; font-weight:700;">Easily buid powerful WinForm applications with HTML, CSS and JavaScript.</p>
+
+
 # WinFormium
 
 ![GitHub](https://img.shields.io/github/license/XuanchenLin/WinFormium)
