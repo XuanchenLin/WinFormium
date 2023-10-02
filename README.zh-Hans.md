@@ -63,6 +63,11 @@ PM> Install-Package WinFormium
 PM> Install-Package WinFormium.Runtime
 ```
 
+CEF 运行库巨大，再加上众所周知的原因，中国内地玩家请自行设置 NuGet 使用国内镜像。
+
+- **Azure CDN** - https://nuget.cdn.azure.cn/v3/index.json
+- **华为云** - https://repo.huaweicloud.com/repository/nuget/v3/index.json
+
 **3. 一个基本的 WinFormium 应用程序需要以下代码：**
 
 按如下示例修改 **Program.cs** 文件中的代码：
