@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="base.css" />
+        <link rel="stylesheet" href="css/tricolore.css" />
+        <script src="page.js"></script>
+    </head>
+    <body class="yellow-theme">
+        <div class="window-container">
+            <div class="body-behind">
+                <header class="header">
+                    <div class="nav-back">
+                        <a href="index.html" class="back-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+                            </svg>
+                        </a>
+                    </div>
+                    <h1 class="logo">
+                        资源加载
+                        <span>加载自定义 Web 资源</span>
+                    </h1>
+                    <div class="window-controls">
+                        <button class="minimize group" app-command="minimize" title="最小化"></button>
+                        <button class="maximize" app-command="maximize" title="最大化"></button>
+                        <button class="close" app-command="close" title="关闭"></button>
+                    </div>
+                </header>
+                <main class="content">
+                    <div class="container">
+                        <div class="tabs">
+                            <input type="radio" name="category" id="embedded" checked />
+                            <input type="radio" name="category" id="folder" />
+                            <input type="radio" name="category" id="proxy" />
+                            <input type="radio" name="category" id="sse" />
+                            <input type="radio" name="category" id="interception" />
+                            <input type="radio" name="category" id="resourcehandler" />
+
+                            <div class="label">
+                                <label for="embedded" class="tab">嵌入式资源</label>
+                                <label for="folder" class="tab">文件资源</label>
+                                <label for="proxy" class="tab">重定向资源</label>
+                                <label for="sse" class="tab">SSE 资源</label>
+                                <label for="interception" class="tab">响应拦截</label>
+                                <label for="resourcehandler" class="tab">资源替换</label>
+                            </div>
+                            <div class="label-container"></div>
+
+                            <div class="content-box">
+                                <div>
+                                    <h2>嵌入式资源</h2>
+                                    <p>嵌入式资源是指直接在应用程序中打包的资源文件。它们可以通过指定的路径访问。本示例的所有 Web 资源采用了<strong>嵌入式资源</strong>的托管方式进行管理，因此分发时只需要单独分发单独的软件包即可。</p>
+                                    <p>WinFormium 提供以全局方式注册的嵌入式资源和以窗体局部注册两种注册方式。</p>
+                                    <h3>全局嵌入式资源</h3>
+                                    <p>全局嵌入式资源可以通过以下方式注册：</p>
+                                    <pre><code data-language="csharp">var builder = WinFormiumApp.CreateBuilder();       
+var app = builder
+    //...
+    .UseGlobalVirtualHostNameForAssemblyEmbeddedFileMapping(new EmbeddedFileMappingOptions
+    {
+        DomainName = "localresources.app",
+        Scheme = "https",
+        EmbeddedResourceDirectoryName = "wwwroot",
+        ResourceAssembly = typeof(MyProject).Assembly,
+    })
+    // ...
+    .Build();
+
+app.Run();</code></pre>
+                                    <p>在上述代码中，`UseGlobalVirtualHostNameForAssemblyEmbeddedFileMapping` 方法用于注册全局嵌入式资源。它指定了资源的域名、协议、资源目录和资源所在的程序集。</p>
+                                    <h3>窗体局部嵌入式资源</h3>
+                                    <p>窗体局部嵌入式资源可以通过以下方式注册：</p>
+                                    <pre><code data-language="csharp">class MyWindow : Formium
+{
+    public MyWindow()
+    {
+        SetVirtualHostNameToEmbeddedFileMapping(new EmbeddedFileMappingOptions
+        {
+            DomainName = "localresources.app",
+            Scheme = "https",
+            EmbeddedResourceDirectoryName = "wwwroot",
+            ResourceAssembly = typeof(MyWindow).Assembly,
+        });
+    }
+}</code></pre>
+                                    <p>在上述代码中，`SetVirtualHostNameToEmbeddedFileMapping` 方法用于注册窗体局部嵌入式资源。它同样指定了资源的域名、协议、资源目录和资源所在的程序集。</p>
+                                    <h3>访问嵌入式资源</h3>
+                                    <p>嵌入式资源可以通过以下方式访问：</p>
+                                    <pre><code data-language="html">&lt;img src="https://localresources.app/images/logo.png" alt="Logo" /&gt;</code></pre>
+                                    <p>在上述代码中，`src` 属性指定了嵌入式资源的 URL，它将从当前 `MyWindow` 所在程序集的 `wwwroot` 目录的 `images` 路径下加载图片。</p>
+                                    <p>请记得将所需资源文件的<strong>生成操作</strong>设置为<strong>嵌入的资源</strong>以确保能够正常访问。这个选项可以在 Visual Studio 的属性窗口里找到。</p>
+                                </div>
+                                <div>
+                                    <h2>文件资源</h2>
+                                    <p>文件资源是指存储在本地文件系统中的资源文件。它们可以通过指定的路径访问。</p>
+                                    <p>WinFormium 提供以全局方式注册的文件资源和以窗体局部注册两种注册方式。</p>
+                                    <h3>全局文件资源</h3>
+                                    <p>全局文件资源可以通过以下方式注册：</p>
+                                    <pre><code data-language="csharp">var builder = WinFormiumApp.CreateBuilder();       
+var app = builder
+    //...
+    .UseGlobalVirtualHostNameForAssemblyEmbeddedFileMapping(new new FolderMappingOptions { 
+        DomainName ="folderresources.app",
+        Scheme= "https",
+        FolderPath = "C:\\Temp\\"
+    })
+    // ...
+    .Build();
+
+app.Run();</code></pre>
+
+                                    <p>在上述代码中，`UseGlobalVirtualHostNameForAssemblyEmbeddedFileMapping` 方法用于注册全局文件资源。它指定了资源的域名、协议和文件夹路径。</p>
+                                    <h3>窗体局部文件资源</h3>
+                                    <p>窗体局部文件资源可以通过以下方式注册：</p>
+                                    <pre><code data-language="csharp">class MyWindow : Formium
+{
+    public MyWindow()
+    {
+        SetVirtualHostNameToFolderMapping(new FolderMappingOptions
+        {
+            DomainName = "localresources.app",
+            Scheme = "https",
+            FolderPath = "C:\\Temp\\"
+        });
+    }
+}</code></pre>
+                                    <p>在上述代码中，`SetVirtualHostNameToFolderMapping` 方法用于注册窗体局部文件资源。它同样指定了资源的域名、协议和文件夹路径。</p>
+                                    <h3>访问文件资源</h3>
+                                    <p>文件资源可以通过以下方式访问：</p>
+                                    <pre><code data-language="html">&lt;img src="https://folderresources.app/images/logo.png" alt="Logo" /&gt;</code></pre>
+                                    <p>在上述代码中，`src` 属性指定了文件资源的 URL，它将从指定的文件夹路径下加载图片。</p>
+                                </div>
+                                <div>
+                                    <h2>重定向资源</h2>
+                                    <p>重定向资源是指将请求重定向到另一个 URL 的资源。它们可以通过指定的路径访问，这个资源控制器的主要功能是解决一些棘手的跨域问题或者代理服务器的问题。</p>
+                                    <p>WinFormium 仅提供以全局方式注册的重定向资源。</p>
+                                    <p>全局重定向资源可以通过以下方式注册：</p>
+                                    <pre><code data-language="csharp">var builder = WinFormiumApp.CreateBuilder();       
+var app = builder
+    //...
+    .UseGlobalHttpProxyMapping("https","www.google.com","https://www.bing.com")
+    // ...
+    .Build();
+
+app.Run();</code></pre>
+                                    <p>在上述代码中，`UseGlobalHttpProxyMapping` 方法用于注册全局重定向资源。它指定了资源的协议、域名和目标 URL。</p>
+                                    <h3>访问重定向资源</h3>
+                                    <p>你可以在 DevTools 的 Console 面板中使用 <strong>fetch</strong> 方法测试重定向资源：</p>
+                                    <pre><code data-language="javascript">var rep = await fetch("https://www.google.com");
+var html = await rep.text();
+console.log(html);</code></pre>
+                                    <p>在上述代码中，使用 fetch 命令从 https://www.google.com 读取内容，但内容来自 https://www.bing.com 。</p>
+                                </div>
+                                <div>
+                                    <h2>SSE(Sever-Sent Events) 资源</h2>
+                                    <p>SSE 资源是指服务器向客户端推送事件的资源。WinFormium 提供了对这种类型资源的支持。点击下面的按钮测试 SSE 资源。</p>
+                                    <p>
+                                        <button class="button" id="startSSE">Start SSE</button>
+                                        <button class="button" id="clearSSEContent">清除 SSE 内容</button>
+                                    </p>
+                                    <div style="padding: 5px 10px; border: 1px solid #ccc; background-color: #f9f9f999; border-radius: 5px">
+                                        <p id="sseContent"></p>
+                                    </div>
+                                    <p>打开 DevTools 的 Network 面板，选择 EventSource 选项卡，可以看到 SSE 资源的事件流。</p>
+                                    <script>
+                                        (() => {
+                                            const btn = document.getElementById("startSSE");
+                                            const sseContent = document.getElementById("sseContent");
+                                            const clearBtn = document.getElementById("clearSSEContent");
+                                            let working = false;
+                                            let workingEventSource = null;
+
+                                            clearBtn.addEventListener("click", () => {
+                                                sseContent.innerHTML = "";
+                                            });
+
+                                            btn.addEventListener("click", () => {
+                                                if (working) {
+                                                    working = false;
+
+                                                    if (workingEventSource) {
+                                                        workingEventSource.close();
+                                                        workingEventSource = null;
+                                                    }
+
+                                                    btn.innerText = "Start SSE";
+                                                } else {
+                                                    working = true;
+
+                                                    btn.innerText = "Stop SSE";
+
+                                                    sseContent.innerHTML = "";
+
+                                                    const eventSource = new EventSource("https://localresources.data/sse");
+
+                                                    workingEventSource = eventSource;
+
+                                                    eventSource.onmessage = (event) => {
+                                                        const data = event.data;
+                                                        sseContent.innerHTML += `${data}`;
+                                                    };
+                                                    eventSource.onerror = (event) => {
+                                                        eventSource.close();
+                                                        working = false;
+                                                        btn.innerText = "Start SSE";
+                                                    };
+                                                    eventSource.addEventListener("end", (event) => {
+                                                        eventSource.close();
+                                                        working = false;
+                                                        btn.innerText = "Start SSE";
+                                                    });
+                                                }
+                                            });
+                                        })();
+                                    </script>
+                                    <h3>使用 SSE 资源示例代码</h3>
+                                    <p>WinFormium 仅提供以窗体局部注册方式注册 SSE 资源。</p>
+                                    <p>窗体局部 SSE 资源可以通过以下方式注册：</p>
+                                    <pre><code data-language="csharp">class MyWindow : Formium
+{
+    private string _fakePrompt = "我说道，“爸爸，你走吧。”他望车外看了看，说，“我买几个橘子去。你就在此地，不要走动。”我看那边月台的栅栏处有几个卖东西的等着顾客。走到那边月台，须穿过铁道，须跳下去又爬上去。父亲是一个胖子，走过去自然要费事些。我本来要去的，他不肯，只好让他去。我看见他戴着黑布小帽，穿着黑布大马褂，深青布棉袍，蹒跚地走到铁道边，慢慢探身下去，尚不大难。可是他穿过铁道，要爬上那边月台，就不容易了。他用两手攀着上面，两脚再向上缩;他肥胖的身子向左微倾，显出努力的样子。这时我看见他的背影，我的泪很快地流下来了。我赶紧拭干了泪，怕他看见，也怕别人看见。我再向外看时，他已抱了朱红的橘子望回走了。过铁道时，他先将橘子散放在地上，自己慢慢爬下，再抱起橘子走。到这边时，我赶紧去搀他。他和我走到车上，将橘子一股脑儿放在我的皮大衣上。于是扑扑衣上的泥土，心里很轻松似的，过一会说，“我走了;到那边来信!”我望着他走出去。他走了几步，回过头看见我，说，“进去吧，里边没人。”等他的背影混入来来往往的人里，再找不着了，我便进来坐下，我的眼泪又来了。";
+
+    public MyWindow()
+    {
+        var controller = SetVirtualHostNameToServerSentEvents("https://localresources.data/sse");
+
+        controller.ClientConnected += Controller_ClientConnected;
+    }
+
+    private async void Controller_ClientConnected(object? sender, WinFormium.WebResource.SSEClientConnectedEventArgs e)
+    {
+        for (var i = 0; i &lt; _fakePrompt.Length; i++)
+        {
+            await Task.Delay(Random.Shared.Next(200));
+            e.SendEvent(new WinFormium.WebResource.ServerSentEvent
+            {
+                Data = $"{_fakePrompt[i]}",
+            });
+        }
+
+        e.SendEvent(new WinFormium.WebResource.ServerSentEvent
+        {
+            Event = "end",
+        });
+    }
+}</code></pre>
+                                    <p>建立一个前端测试页面用于测试 SSE 资源：</p>
+                                    <pre><code data-language="html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en" xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+    &lt;title&gt;SSE Test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;SSE 测试&lt;/h2&gt;
+    &lt;p&gt;点击按钮开始接收服务器发送事件 (SSE)。&lt;/p&gt;
+    &lt;button id="startSSE"&gt;Start SSE&lt;/button&gt;
+    &lt;p id="sseContent"&gt;&lt;/p&gt;
+
+    &lt;script&gt;
+        (() =&gt; {
+
+            const btn = document.getElementById("startSSE");
+            const sseContent = document.getElementById("sseContent");
+
+            let working = false;
+            let workingEventSource = null;
+
+            btn.addEventListener("click", () =&gt; {
+
+                if (working) {
+                    working = false;
+
+                    if (workingEventSource) {
+                        workingEventSource.close();
+                        workingEventSource = null;
+                    }
+
+                    btn.innerText = "Start SSE";
+
+                }
+                else {
+                    working = true;
+
+                    btn.innerText = "Stop SSE";
+
+                    sseContent.innerHTML = "";
+
+                    const eventSource = new EventSource("//localresources.data/sse");
+
+                    workingEventSource = eventSource;
+
+                    eventSource.onmessage = (event) =&gt; {
+                        const data = event.data;
+                        sseContent.innerHTML += `${data}`;
+
+                    };
+                    eventSource.onerror = (event) =&gt; {
+                        eventSource.close();
+                        working = false;
+                        btn.innerText = "Start SSE";
+                    };
+                    eventSource.addEventListener("end", (event) =&gt; {
+                        eventSource.close();
+                        working = false;
+                        btn.innerText = "Start SSE";
+                    });
+                }
+            });
+        })();
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                                    <p>在上述代码中，`SetVirtualHostNameToServerSentEvents` 方法用于注册窗体局部 SSE 资源。它指定了资源的协议和域名。</p>
+                                    <p>在前端测试页面中，使用 `EventSource` 对象连接到 SSE 资源的 URL，并监听服务器发送的事件。点击按钮可以开始或停止接收事件。</p>
+                                </div>
+                                <div>
+                                    <h2>响应拦截</h2>
+                                    <p>响应拦截是指在请求处理过程中对响应进行修改或处理。WinFormium 提供了对特定请求响应资源的拦截，你可以对响应内容进行修改（例如注入代码等）。</p>
+                                    <p>在 Formium 窗体中使用 <strong>FilterWebResponse</strong> 方法的重载实现筛选和拦截。</p>
+                                    <h3>示例演示</h3>
+                                    <p>在下面的示例中，我们将拦截对 https://www.bing.com 的请求，并修改响应内容，将一个特定的 HTML 注入到响应中。</p>
+                                    <p>
+                                        <button class="button" id="openFilterWebResponseWindow">拦截 Bing 响应</button>
+                                    </p>
+
+                                    <p>示例代码</p>
+                                    <pre><code data-language="csharp">class MyWindow : Formium
+{
+    public MyWindow()
+    {
+        Url = "https://www.bing.com";
+    }
+    protected override WebResponseFilterHandlerDelegate? FilterWebResponse(CefBrowser browser, CefFrame frame, CefRequest request, CefResponse response)
+    {
+        if (request.Url== "https://www.bing.com" && response.GetHeaderMap()["content-type"] is var contentType && contentType is not null && contentType.Contains("text/html", StringComparison.InvariantCultureIgnoreCase) && frame.IsMain)
+        {
+            return new WebResponseFilterHandlerDelegate((origin) =>
+            {
+                var html = Encoding.UTF8.GetString(origin);
+                html = html.Replace("&lt;/body&gt;", """&lt;div style="position: fixed; left: 50%; top: 40%; padding: 20px; background: #cc0000af; transform: translateX(-50%) translateY(-100%); color: white; font-weight: 600; font-size: 2em;border-radius:15px;backdrop-filter:blur(10px);box-shadow: 1px 1px 9px #333333ae;z-index:9999" data-bm="18"&gt;!!!INJECTED!!! by WinFormium&lt;/div&gt;&lt;/body&gt;""");
+                return Encoding.UTF8.GetBytes(html);
+            });
+        }
+        return base.FilterWebResponse(browser, frame, request, response);
+    }
+}</code></pre>
+                                </div>
+                                <div>
+                                    <h2>资源替换</h2>
+                                    <p>资源替换是指在请求处理过程中对特定资源进行替换。WinFormium 提供了对特定请求资源的替换，你可以将请求的资源替换为其他资源。</p>
+                                    <p>在 Formium 窗体中使用 <strong>RequestWebResource</strong> 方法的重载实现资源替换。</p>
+                                    <pre><code data-language="csharp">class MyWindow : Formium
+{
+    public MyWindow()
+    {
+        Url = "https://www.bing.com";
+    }
+    protected override WebResourceResponse? RequestWebResource(CefBrowser browser, CefFrame frame, CefRequest request)
+    {
+
+        if (request.Url.StartsWith("https://www.bing.com"))
+        {
+            var response = new WebResourceResponse(Encoding.UTF8.GetBytes($"Filtered by {nameof(FilterWebResponse)}"), "text/plain");
+            return response;
+        }
+
+        return base.RequestWebResource(browser, frame, request);
+    }
+}</code></pre>
+                                    <p>在上述代码中，`RequestWebResource` 方法用于替换特定资源的请求。它检查请求的 URL 是否以 "https://www.bing.com" 开头，如果是，则返回一个新的响应对象，内容为 "Filtered by FilterWebResponse"。</p>
+                                    <p>你可以根据需要修改替换的资源内容和类型。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <script src="rainbow.min.js"></script>
+        <script src="language/generic.js"></script>
+        <script src="language/csharp.js"></script>
+        <script src="language/javascript.js"></script>
+        <script src="language/css.js"></script>
+        <script src="language/html.js"></script>
+        <script>
+            (() => {
+                function getMainWindow() {
+                    if (window.formium?.nativeObjects?.mainWindow) {
+                        return window.formium?.nativeObjects?.mainWindow;
+                    } else {
+                        console.warn("Formium is not available. Please ensure the Formium library is loaded.");
+                        return null;
+                    }
+                }
+
+                const btn = document.getElementById("openFilterWebResponseWindow");
+                btn.addEventListener("click", () => {
+                    const mainWindow = getMainWindow();
+                    mainWindow?.openFilterWebResponseDemoWindow();
+                });
+            })();
+        </script>
+    </body>
+</html>

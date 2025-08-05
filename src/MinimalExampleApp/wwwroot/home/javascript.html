@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="base.css" />
+        <script src="page.js"></script>
+    </head>
+    <body class="pink-theme">
+        <div class="window-container">
+            <div class="body-behind">
+                <header class="header">
+                    <div class="nav-back">
+                        <a href="index.html" class="back-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+                            </svg>
+                        </a>
+                    </div>
+                    <h1 class="logo">
+                        JavaScript
+                        <span>与 JavaScript 通讯和交互</span>
+                    </h1>
+                    <div class="window-controls">
+                        <button class="minimize group" app-command="minimize" title="最小化"></button>
+                        <button class="maximize" app-command="maximize" title="最大化"></button>
+                        <button class="close" app-command="close" title="关闭"></button>
+                    </div>
+                </header>
+                <main class="content">
+                    <div class="container">
+                        <div class="tabs">
+                            <input type="radio" name="category" id="invoke" checked />
+                            <input type="radio" name="category" id="message" />
+                            <input type="radio" name="category" id="object" />
+                            <input type="radio" name="category" id="binding" />
+                            <div class="label">
+                                <label for="invoke" class="tab">JavaScript 调用</label>
+                                <label for="message" class="tab">Web Message</label>
+                                <label for="object" class="tab">对象注册</label>
+                                <label for="binding" class="tab">Window 对象绑定</label>
+                            </div>
+                            <div class="label-container"></div>
+
+                            <div class="content-box">
+                                <div>JavaScript 调用</div>
+                                <div>Web Message</div>
+                                <div>对象注册</div>
+                                <div>Window 对象绑定</div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>

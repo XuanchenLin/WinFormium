@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Layered Window</title>
+        <link rel="stylesheet" href="index.css" />
+    </head>
+    <body>
+        <div class="dog" app-command="close">
+            <div class="heart heart--1"></div>
+            <div class="heart heart--2"></div>
+            <div class="heart heart--3"></div>
+            <div class="heart heart--4"></div>
+            <div class="head">
+                <div class="year year--left"></div>
+                <div class="year year--right"></div>
+                <div class="nose"></div>
+                <div class="face">
+                    <div class="eye eye--left"></div>
+                    <div class="eye eye--right"></div>
+                    <div class="mouth"></div>
+                </div>
+            </div>
+            <div class="body">
+                <div class="cheast"></div>
+                <div class="back"></div>
+                <div class="legs">
+                    <div class="legs__front legs__front--left"></div>
+                    <div class="legs__front legs__front--right"></div>
+                    <div class="legs__back legs__back--left"></div>
+                    <div class="legs__back legs__back--right"></div>
+                </div>
+                <div class="tail"></div>
+            </div>
+        </div>
+        <audio src="./small-dog-barking.mp3" preload="auto" hidden></audio>
+        <script type="text/javascript">
+            // play the audio when the page loads and loop it with the duration of 5000ms
+            window.addEventListener("DOMContentLoaded", () => {
+                const audio = document.querySelector("audio");
+                audio.play();
+                setInterval(() => {
+                    audio.currentTime = 0;
+                    audio.play();
+                }, 15000);
+
+                let direction = -1; // 1 for forward, -1 for backward
+                let movedPixels = 0;
+
+                const totalMoveDistance = 400; // total distance to move in pixels
+
+                const dog = document.querySelector(".dog");
+
+                const stepLength = 2; // pixels to move each step
+
+                function moveWindow() {
+                    if (movedPixels >= totalMoveDistance) {
+                        direction *= -1; // reverse direction
+                        movedPixels = 0; // reset moved pixels
+
+                        dog.classList.toggle("reverse"); // toggle the reverse class
+                    }
+
+                    window.moveBy(direction * stepLength, 0);
+                    movedPixels += stepLength;
+
+                    setTimeout(moveWindow, 200);
+                }
+
+                moveWindow();
+            });
+        </script>
+    </body>
+</html>

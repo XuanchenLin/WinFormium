@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net9.0-windows</TargetFramework>
+        
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <!--<UseWindowsForms>true</UseWindowsForms>-->
+
+        <AssemblyTitle>WinFormium Subprocess</AssemblyTitle>
+
+        <ApplicationVisualStyles>true</ApplicationVisualStyles>
+        <ApplicationUseCompatibleTextRendering>true</ApplicationUseCompatibleTextRendering>
+        <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+
+        <PublishAot>true</PublishAot>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <_SuppressWinFormsTrimError>true</_SuppressWinFormsTrimError>
+        <BaseOutputPath>$(BinDir)\ExampleApp\</BaseOutputPath>
+        <ApplicationIcon>Subprocess.ico</ApplicationIcon>
+
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="WinFormium" Version="1.1.109.1" />
+        <PackageReference Include="WinFormium.SDK.Runtime" Version="109.0.5414.1" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <Content Include="Subprocess.ico" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Properties\" />
+    </ItemGroup>
+
+</Project>

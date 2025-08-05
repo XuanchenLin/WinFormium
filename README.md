@@ -1,4 +1,4 @@
-<p align="center">
+﻿<p align="center">
     <img src="./artworks/WinFormiumLogo.png" width="144" />
 </p>
 <h1 align="center">The WinFormium Project</h1>
@@ -10,7 +10,7 @@
 ![Nuget](https://img.shields.io/nuget/v/WinFormium)
 ![Nuget](https://img.shields.io/nuget/dt/WinFormium)
 
-English | [简体中文](README.zh-Hans.md)
+English | [简体中文](README.zh-CN.md)
 
 ## ⭐ About
 

@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Embedded</title>
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .window__titlbar--shown header {
+            display: none;
+        }
+
+        .window__titlbar--hidden header {
+            color: white;
+            padding: 10px;
+            text-align: center;
+            app-region: drag;
+        }
+
+        .window--activated header {
+            background-color: #0031aa;
+        }
+
+        .window--deactivated header {
+            background-color: #808080;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        #activated-status {
+            width: 60px;
+        }
+
+
+        .window--activated #activated-status {
+            background-color: green;
+        }
+
+        .window--deactivated #activated-status {
+            background-color: dimgray;
+        }
+
+        .window--activated #activated-status:after {
+            background-color: green;
+            content: "ACTIVATED";
+        }
+
+        .window--deactivated #activated-status:after {
+            background-color: dimgray;
+            content: "DEACTIVATE"
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <span>WinFormedge App</span>
+    </header>
+
+    <main>
+        <div>
+            <button id="minimizeButton" app-command="Minimize">Minimize</button>
+            <button id="maximizeButton" app-command="Maximize" title="最大化">Toggle Maximize</button>
+            <button id="fullscreenButton" app-command="FullScreen">Toggle FullScreen</button>
+            <button id="closeButton" app-command="Close">Close</button>
+        </div>
+
+        <div>
+            Activated: <span id="activated-status"></span>
+        </div>
+
+        <div>
+            <label for="cars">选择一辆汽车：</label>
+            <select name="cars" id="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select>
+        </div>
+
+        <div>
+            <h2>SSE 测试</h2>
+            <p>点击按钮开始接收服务器发送事件 (SSE)。</p>
+            <button id="startSSE">Start SSE</button>
+
+            <p id="sseContent" style="width:100%; word-break:break-word; word-wrap: break-word;">
+            </p>
+
+        </div>
+    </main>
+
+    <script>
+        (() => {
+
+            const btn = document.getElementById("startSSE");
+            const sseContent = document.getElementById("sseContent");
+
+            let working = false;
+            let workingEventSource = null;
+
+            btn.addEventListener("click", () => {
+
+                if (working) {
+                    working = false;
+
+                    if (workingEventSource) {
+                        workingEventSource.close();
+                        workingEventSource = null;
+                    }
+
+                    btn.innerText = "Start SSE";
+
+                }
+                else {
+                    working = true;
+
+                    btn.innerText = "Stop SSE";
+
+                    sseContent.innerHTML = "";
+
+                    const eventSource = new EventSource("//localresources.data/sse");
+
+                    workingEventSource = eventSource;
+
+                    eventSource.onmessage = (event) => {
+                        const data = event.data;
+                        sseContent.innerHTML += `${data}`;
+
+                    };
+                    eventSource.onerror = (event) => {
+                        eventSource.close();
+                        working = false;
+                        btn.innerText = "Start SSE";
+                    };
+                    eventSource.addEventListener("end", (event) => {
+                        eventSource.close();
+                        working = false;
+                        btn.innerText = "Start SSE";
+                    });
+                }
+            });
+        })();
+    </script>
+
+
+</body>
+</html>
+
+

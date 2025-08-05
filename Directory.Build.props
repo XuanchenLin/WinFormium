@@ -1,0 +1,16 @@
+﻿<Project>
+    <PropertyGroup>
+        <RepositoryRootDirectory>$(MSBuildThisFileDirectory)</RepositoryRootDirectory>
+        <BinDir>$(RepositoryRootDirectory)bin</BinDir>
+        <BaseOutputPath Condition=" '$(BaseOutputPath)' == '' ">$(BinDir)\$(MSBuildProjectName)\</BaseOutputPath>
+        <BaseIntermediateOutputPath>$(RepositoryRootDirectory)obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+        <LangVersion>latest</LangVersion>
+        <GenerateDocumentationFile>false</GenerateDocumentationFile>
+        <NoWarn>CS1591;CS1701</NoWarn>
+        <Company>Net Dimension Studio</Company>
+        <Authors>Xuanchen Lin</Authors>
+        <Copyright>Copyrights © 2015-$([System.DateTime]::Now.Year) Xuanchen Lin. All rights reserved.</Copyright>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+</Project>

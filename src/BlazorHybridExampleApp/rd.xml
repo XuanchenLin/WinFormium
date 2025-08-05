@@ -1,0 +1,12 @@
+﻿<Directives xmlns="http://schemas.microsoft.com/netfx/2013/01/metadata">
+    <Application>
+        <Assembly Name="System.Resources.ResourceManager" Dynamic="Required All" />
+        <Assembly Name="System.Resources.Extensions"  Dynamic="Required All" />
+        <Assembly Name="System.Drawing.Common"  Dynamic="Required All" />
+        <Assembly Name="Microsoft.AspNetCore.Components.Web" Dynamic="Required All" />
+        <Assembly Name="Microsoft.AspNetCore.Components.WebView" Dynamic="Required All" />
+        <Assembly Name="WinFormium" Dynamic="Required All" />
+        <Assembly Name="WinFormium.BlazorHybrid" Dynamic="Required All" />
+
+    </Application>
+</Directives>
