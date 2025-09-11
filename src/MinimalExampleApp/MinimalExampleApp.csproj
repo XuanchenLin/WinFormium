@@ -43,6 +43,7 @@
     <ItemGroup>
       <PackageReference Include="System.Drawing.Common" Version="9.0.5" />
       <PackageReference Include="System.Text.Json" Version="9.0.5" />
+      <PackageReference Include="WinFormium.Runtime" Version="109.0.5414.1" />
     </ItemGroup>
 
     <ItemGroup>
@@ -51,7 +52,6 @@
 
     <ItemGroup>
         <PackageReference Include="WinFormium" Version="1.1.109.1" />
-        <PackageReference Include="WinFormium.SDK.Runtime" Version="109.0.5414.1" />
     </ItemGroup>
 
 

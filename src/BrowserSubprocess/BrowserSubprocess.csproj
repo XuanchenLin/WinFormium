@@ -24,7 +24,6 @@
 
     <ItemGroup>
         <PackageReference Include="WinFormium" Version="1.1.109.1" />
-        <PackageReference Include="WinFormium.SDK.Runtime" Version="109.0.5414.1" />
     </ItemGroup>
 
 
