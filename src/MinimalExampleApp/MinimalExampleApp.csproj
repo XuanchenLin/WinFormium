@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        
+
         <OutputType>WinExe</OutputType>
         <TargetFramework>net9.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
@@ -13,7 +13,7 @@
         <ApplicationVisualStyles>true</ApplicationVisualStyles>
         <ApplicationUseCompatibleTextRendering>true</ApplicationUseCompatibleTextRendering>
         <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
-        
+
         <BaseOutputPath>$(BinDir)\ExampleApp\</BaseOutputPath>
         <ApplicationIcon>Example.ico</ApplicationIcon>
         <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -27,7 +27,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <None Remove="wwwroot\**\*" />
+        <None Remove="wwwroot\**\*" />
     </ItemGroup>
 
     <ItemGroup>
@@ -35,24 +35,22 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="Example.ico" />
+        <Content Include="Example.ico" />
     </ItemGroup>
 
 
 
     <ItemGroup>
-      <PackageReference Include="System.Drawing.Common" Version="9.0.5" />
-      <PackageReference Include="System.Text.Json" Version="9.0.5" />
-      <PackageReference Include="WinFormium.Runtime" Version="109.0.5414.1" />
+        <PackageReference Include="System.Drawing.Common" Version="9.0.*" />
+        <PackageReference Include="System.Text.Json" Version="9.0.*" />
+        <PackageReference Include="WinFormium" Version="1.1.109.3" />
+        <PackageReference Include="WinFormium.Runtime" Version="109.0.5414.1" />
     </ItemGroup>
 
     <ItemGroup>
         <TrimmerRootAssembly Include="WinFormium" />
     </ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="WinFormium" Version="1.1.109.1" />
-    </ItemGroup>
 
 
     <ItemGroup>
@@ -62,26 +60,26 @@
 
 
     <ItemGroup>
-      <Compile Update="Properties\Resources.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Resources.resx</DependentUpon>
-      </Compile>
+        <Compile Update="Properties\Resources.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
     </ItemGroup>
 
 
 
     <ItemGroup>
-      <EmbeddedResource Update="Properties\Resources.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
+        <EmbeddedResource Update="Properties\Resources.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
     </ItemGroup>
 
 
 
     <ItemGroup>
-      <Folder Include="wwwroot\home\window-styles\layered\" />
-      <Folder Include="wwwroot\home\window-styles\kisok\" />
+        <Folder Include="wwwroot\home\window-styles\layered\" />
+        <Folder Include="wwwroot\home\window-styles\kisok\" />
     </ItemGroup>
 </Project>
