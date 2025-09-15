@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFileName": "Resources/version.min.js",
+    "inputFiles": [
+      "Resources/version.js"
+    ]
+  },
+  {
+    "outputFileName": "Resources/hostwindow.min.js",
+    "inputFiles": [
+      "Resources/hostwindow.js"
+    ]
+  }
+]

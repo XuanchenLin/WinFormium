@@ -1,0 +1,153 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net8.0-windows;net9.0-windows;</TargetFrameworks>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+        <UseWindowsForms>true</UseWindowsForms>
+        <DebugType>portable</DebugType>
+        <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+        <IsAotCompatible>true</IsAotCompatible>
+        <CustomResourceTypesSupport>true</CustomResourceTypesSupport>
+        <NoWarn>IL3050,CS8981</NoWarn>
+        <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+        <Title>WinFormium for Windows Form Applications</Title>
+        <Description>Easily buid powerful WinForm applications with HTML, CSS and JavaScript.</Description>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>CEF Chromium WinForm WinForms WinFormium Hybrid-App</PackageTags>
+        <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/XuanchenLin/WinFormium</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/XuanchenLin/WinFormium</PackageProjectUrl>
+        <Version>1.1.109.$([System.DateTime]::Now.Date.Subtract($([System.DateTime]::Parse($([System.String]::Format("{0}-5-1",2025))))).TotalDays)</Version>
+        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+        <PackageIcon>WinFormiumLogo.png</PackageIcon>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageOutputPath>$(BinDir)</PackageOutputPath>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)'=='Release'">
+        <Version>1.1.109.3</Version>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <IncludeSymbols>true</IncludeSymbols>
+        <IncludeSource>true</IncludeSource>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+        <Deterministic>true</Deterministic>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Using Include="System.Reflection" />
+        <Using Include="System.Collections.Concurrent" />
+        <Using Include="System.Globalization" />
+        <Using Include="System.Runtime.InteropServices" />
+        <Using Include="System.Text" />
+        <Using Include="System.Text.RegularExpressions" />
+        <Using Include="System.Text.Json" />
+        <Using Include="System.Text.Json.Serialization" />
+        <Using Include="System.Text.Json.Serialization.Metadata" />
+        <Using Include="System.Security" />
+        <Using Include="WinFormium.Browser" />
+        <Using Include="WinFormium.WebResource" />
+        <Using Include="WinFormium.Browser.CefGlue" />
+        <Using Include="WinFormium.JavaScript" />
+        <Using Include="WinFormium.Browser.ProcessCommunication" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Properties\**" />
+      <EmbeddedResource Remove="Properties\**" />
+      <None Remove="Properties\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="JavaScript\TestJsBindingObject.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="JavaScript\TestJsBindingObject.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="System.Text.Json" Version="9.0.*" />
+        <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.205">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Vortice.Direct2D1" Version="3.6.2" />
+        <PackageReference Include="Vortice.DXGI" Version="3.6.2" />
+        <PackageReference Include="Vortice.Direct3D11" Version="3.6.2" />
+        <PackageReference Include="Vortice.DirectComposition" Version="3.6.2" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
+        <PackageReference Include="PolySharp" Version="1.15.0" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+        <Compile Update="Resources\Files.Designer.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>Files.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Icons.Designer.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>Icons.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Images.Designer.cs">
+          <DesignTime>True</DesignTime>
+          <AutoGen>True</AutoGen>
+          <DependentUpon>Images.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\TextResource.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>TextResource.resx</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Update="Resources\Files.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>Files.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Icons.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>Icons.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Images.resx">
+          <Generator>ResXFileCodeGenerator</Generator>
+          <LastGenOutput>Images.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\TextResource.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>TextResource.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Resources\formium.js">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\artworks\WinFormiumLogo.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Include=".\README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+
+</Project>

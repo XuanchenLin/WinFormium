@@ -1,0 +1,1 @@
+﻿# Blazor Hybrid Plugin for WinFormium

@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFrameworks>net8.0-windows;net9.0-windows</TargetFrameworks>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Version>1.1.109.$([System.DateTime]::Now.Date.Subtract($([System.DateTime]::Parse($([System.String]::Format("{0}-6-12",2025))))).TotalDays)</Version>
+        <CustomResourceTypesSupport>true</CustomResourceTypesSupport>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)'=='Release'">
+        <Version>1.1.109.4</Version>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <IncludeSymbols>true</IncludeSymbols>
+        <IncludeSource>true</IncludeSource>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+        <Deterministic>true</Deterministic>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Title>Blazor Hybrid Plugin for WinFormium</Title>
+        <Description>The Blazor Hybrid Plugin for WinFormium enables seamless integration of Blazor components into WinFormium-based Windows Forms applications.</Description>
+        <PackageTags>CEF Chromium WinForm WinForms WinFormium Hybrid-App Blazor</PackageTags>
+        <PackageIcon>WinFormiumBlazor.png</PackageIcon>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <RepositoryType>git</RepositoryType>
+        <PackageProjectUrl>https://github.com/XuanchenLin/WinFormium</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/XuanchenLin/WinFormium.git</RepositoryUrl>
+        <PackageOutputPath>$(BinDir)</PackageOutputPath>
+        <DelaySign>False</DelaySign>
+        <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+        <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
+        <SignAssembly>False</SignAssembly>
+        <DebugType>portable</DebugType>
+        <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+        <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+        <IsAotCompatible>false</IsAotCompatible>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Using Include="Microsoft.AspNetCore.Components" />
+        <Using Include="Microsoft.AspNetCore.Components.Web" />
+        <Using Include="Microsoft.AspNetCore.Components.WebView" />
+        <Using Include="Microsoft.Extensions.DependencyInjection" />
+        <Using Include="Microsoft.Extensions.FileProviders" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\WinFormium\WinFormium.csproj" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0-windows' ">
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="8.0.*" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net9.0-windows' ">
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="9.0.*" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\artworks\WinFormiumBlazor.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Include=".\README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+</Project>
