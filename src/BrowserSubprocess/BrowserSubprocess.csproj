@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <TargetFramework>net9.0-windows</TargetFramework>
+        <TargetFramework>net10.0-windows</TargetFramework>
         
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
@@ -21,18 +21,16 @@
         <ApplicationIcon>Subprocess.ico</ApplicationIcon>
 
     </PropertyGroup>
-
-    <ItemGroup>
-        <PackageReference Include="WinFormium" Version="1.1.109.3" />
-    </ItemGroup>
-
-
     <ItemGroup>
       <Content Include="Subprocess.ico" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Properties\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\WinFormium\WinFormium.csproj" />
     </ItemGroup>
 
 </Project>

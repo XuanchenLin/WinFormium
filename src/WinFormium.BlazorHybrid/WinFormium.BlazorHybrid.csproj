@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
-        <TargetFrameworks>net8.0-windows;net9.0-windows</TargetFrameworks>
+        <TargetFrameworks>net8.0-windows;net9.0-windows;net10.0-windows</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <Version>1.1.109.$([System.DateTime]::Now.Date.Subtract($([System.DateTime]::Parse($([System.String]::Format("{0}-6-12",2025))))).TotalDays)</Version>
@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)'=='Release'">
-        <Version>1.1.109.4</Version>
+        <Version>1.2.109.1</Version>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <IncludeSymbols>true</IncludeSymbols>
@@ -62,6 +62,18 @@
     <ItemGroup Condition=" '$(TargetFramework)' == 'net9.0-windows' ">
         <PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="9.0.*" />
     </ItemGroup>
+
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net10.0-windows' ">
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="10.0.*" />
+    </ItemGroup>
+
+
+    <Target Name="RemoveConflictingStaticWebAssets" AfterTargets="ResolveStaticWebAssetsInputs" Condition=" '$(TargetFramework)' == 'net10.0-windows' ">
+        <ItemGroup>
+            <StaticWebAsset Remove="@(StaticWebAsset)" Condition="$([System.String]::Copy('%(StaticWebAsset.Identity)').Contains('blazor.modules.json'))" />
+            <StaticWebAsset Remove="@(StaticWebAsset)" Condition="$([System.String]::Copy('%(StaticWebAsset.Identity)').Contains('blazor.webview.js'))" />
+        </ItemGroup>
+    </Target>
 
     <ItemGroup>
         <None Include="..\..\artworks\WinFormiumBlazor.png">
