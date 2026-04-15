@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <header style="app-region:drag">
+        application header
+    </header>
+    <div class="tabs">
+        <a href="index.html">tab1</a>
+        <a href="interaction.html">tab2</a>
+        <a href="javascript.html">tab3</a>
+        <a href="javascript.html">logout</a>
+    </div>
+    <iframe src="index.html" frameborder="0" class="webview" width="800" height="600"></iframe>
+
+    <script>
+        (function () {
+            const tabs = document.querySelectorAll('.tabs a');
+            const iframe = document.querySelector('iframe');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    iframe.src = tab.href;
+                });
+            });
+
+            const logoutTab = document.querySelector('.tabs a:last-child');
+
+            logoutTab.addEventListener('click', (e) => {
+                if (confirm('确定要退出系统吗？')) {
+                    // 这里可调用 C# 退出方法，或直接刷新
+                    // window.external.Logout(); // NanUI 交互示例
+                    location.reload();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

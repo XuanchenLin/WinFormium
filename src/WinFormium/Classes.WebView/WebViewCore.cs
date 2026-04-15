@@ -265,10 +265,18 @@ internal partial class WebViewCore
         /// <inheritdoc/>
         protected override void WndProc(ref Message m)
         {
-            if (!_forwardAction.Invoke(ref m))
+            try
             {
-                base.WndProc(ref m);
+                if (!_forwardAction.Invoke(ref m))
+                {
+                    base.WndProc(ref m);
+                }
             }
+            catch (NullReferenceException)
+            {
+
+            }
+            
         }
 
         /// <summary>

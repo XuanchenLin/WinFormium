@@ -29,7 +29,7 @@
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)'=='Release'">
-        <Version>1.2.109.1</Version>
+        <Version>1.2.109.2</Version>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <IncludeSymbols>true</IncludeSymbols>
@@ -74,15 +74,15 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="System.Text.Json" Version="10.0.*" />
-        <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.248">
+        <PackageReference Include="System.Text.Json" Version="10.0.2" />
+        <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.269">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Vortice.Direct2D1" Version="3.6.2" />
-        <PackageReference Include="Vortice.DXGI" Version="3.6.2" />
-        <PackageReference Include="Vortice.Direct3D11" Version="3.6.2" />
-        <PackageReference Include="Vortice.DirectComposition" Version="3.6.2" />
+        <PackageReference Include="Vortice.Direct2D1" Version="3.8.2" />
+        <PackageReference Include="Vortice.DXGI" Version="3.8.2" />
+        <PackageReference Include="Vortice.Direct3D11" Version="3.8.2" />
+        <PackageReference Include="Vortice.DirectComposition" Version="3.8.2" />
     </ItemGroup>
 
     <ItemGroup>
