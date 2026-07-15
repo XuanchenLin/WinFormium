@@ -1,4 +1,4 @@
-﻿// This file is part of the WinFormium project.
+// This file is part of the WinFormium project.
 // Copyright (c) 2025 Xuanchen Lin all rights reserved.
 // This project is licensed under the LGPL License.
 // See the LICENSE file in the project root for more information.
@@ -34,7 +34,7 @@ class PipeClient
     /// <returns>The response from the server, or <c>null</c> if an error occurs.</returns>
     public string? SendMessage(string message)
     {
-        var client = new NamedPipeClientStream(".", _pipeName, PipeDirection.InOut, PipeOptions.Asynchronous);
+        var client = new NamedPipeClientStream(".", _pipeName, PipeDirection.InOut, PipeOptions.WriteThrough);
 
 
         try

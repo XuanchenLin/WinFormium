@@ -1,4 +1,4 @@
-﻿// This file is part of the WinFormium project.
+// This file is part of the WinFormium project.
 // Copyright (c) 2025 Xuanchen Lin all rights reserved.
 // This project is licensed under the LGPL License.
 // See the LICENSE file in the project root for more information.
@@ -22,7 +22,12 @@ internal partial class JavaScriptEngine
         //if(frame.IsMain)
         //{
         //}
-        ExecuteScriptOnDocumentCreated(frame);
+
+        //frame.ExecuteJavaScript("console.log('ContextCreatedOnBrowserSide');", string.Empty, 0);
+
+        _isContextCreated = true;
+
+        //ExecuteScriptOnDocumentCreated(frame);
     }
 
     public override void ContextReleasedOnBrowserSide(CefBrowser browser, CefFrame frame)
@@ -320,7 +325,7 @@ internal partial class JavaScriptEngine
             var frame = Browser.GetMainFrame();
             if (frame is not null)
             {
-                frame.ExecuteJavaScript(script, frame.Url ?? "about:blank", 0);
+                frame.ExecuteJavaScript(script, string.Empty, 0);
             }
         }
 
@@ -333,6 +338,15 @@ internal partial class JavaScriptEngine
         {
             _scriptsToExecuteOnDocumentCreated.Remove(id);
         }
+    }
+
+    private ProcessResponse OnJsExecuteScriptOnDocumentCreated(ProcessRequest request)
+    {
+        return new ProcessResponse
+        {
+            Success = true,
+            Data = JsonSerializer.Serialize(_scriptsToExecuteOnDocumentCreated, WinFormiumJsonSerializerContext.Default.DictionaryInt32String)
+        };
     }
 
     private void ExecuteScriptOnDocumentCreated(CefFrame frame)

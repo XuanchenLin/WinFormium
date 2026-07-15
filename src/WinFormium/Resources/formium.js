@@ -1,4 +1,4 @@
-﻿var chrome;
+var chrome;
 var formium;
 var __winformium;
 
@@ -217,6 +217,10 @@ var __winformium;
         webview = new WebView();
 
         nativeObjects = new NativeBoundObjectRepository();
+
+        addEventListener(type, callback) {
+
+        }
     }
 
     formium = new Formium();

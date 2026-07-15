@@ -1,4 +1,4 @@
-﻿// This file is part of the WinFormium project.
+// This file is part of the WinFormium project.
 // Copyright (c) 2025 Xuanchen Lin all rights reserved.
 // This project is licensed under the LGPL License.
 // See the LICENSE file in the project root for more information.
@@ -20,6 +20,31 @@ internal partial class JavaScriptEngine
     }
     public override void ContextCreatedOnRenderSide(CefBrowser browser, CefFrame frame, CefV8Context context)
     {
+
+        if(frame.IsMain && frame.IsValid && !frame.Url.StartsWith("devtools://"))
+        {
+            var response = Request(new ProcessRequest
+            {
+                BrowserId = frame.Browser.Identifier,
+                FrameId = frame.Identifier,
+                Name = "ExecuteScriptOnDocumentCreated"
+            });
+
+            if (response.Success && response.Data is not null)
+            {
+                var scripts = JsonSerializer.Deserialize<Dictionary<int, string>>(response.Data, WinFormiumJsonSerializerContext.Default.DictionaryInt32String);
+
+                if (scripts is not null)
+                {
+                    foreach ((var _, string script) in scripts)
+                    {
+                        frame.ExecuteJavaScript(script, frame.Url ?? string.Empty, 0);
+                    }
+                }
+            }
+        }
+
+
     }
 
     public override void ContextReleasedOnRenderSide(CefBrowser browser, CefFrame frame, CefV8Context context)

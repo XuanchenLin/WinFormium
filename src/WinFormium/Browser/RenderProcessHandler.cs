@@ -1,4 +1,4 @@
-﻿// This file is part of the WinFormium project.
+// This file is part of the WinFormium project.
 // Copyright (c) 2025 Xuanchen Lin all rights reserved.
 // This project is licensed under the LGPL License.
 // See the LICENSE file in the project root for more information.
@@ -64,10 +64,14 @@ class RenderProcessHandler : CefRenderProcessHandler
 
     }
 
+
+
     /// <inheritdoc/>
     protected override void OnContextCreated(CefBrowser browser, CefFrame frame, CefV8Context context)
     {
         //Console.WriteLine($"[RENDER(BrowserID:{browser.Identifier})] -> {nameof(OnContextCreated)} 0x{frame.Identifier:X}");
+
+        //frame.ExecuteJavaScript("console.log('Context created');", string.Empty, 0);
 
         CommunicationBridge?.OnRenderContextCreated(browser, frame, context);
 

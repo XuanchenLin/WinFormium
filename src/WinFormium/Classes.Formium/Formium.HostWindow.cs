@@ -1,4 +1,4 @@
-﻿// This file is part of the WinFormium project.
+// This file is part of the WinFormium project.
 // Copyright (c) 2025 Xuanchen Lin all rights reserved.
 // This project is licensed under the LGPL License.
 // See the LICENSE file in the project root for more information.
@@ -1123,6 +1123,8 @@ public partial class Formium : IWin32Window
         {
             Activated = _isWindowActivated
         });
+
+        InjectHostWindowScript(browser);
 
 
         //UpdateWindowCaption();
