@@ -29,7 +29,7 @@
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)'=='Release'">
-        <Version>1.2.109.3</Version>
+        <Version>1.2.109.4</Version>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <IncludeSymbols>true</IncludeSymbols>
