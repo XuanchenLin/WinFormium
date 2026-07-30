@@ -38,7 +38,7 @@ internal partial class JavaScriptEngine
                 {
                     foreach ((var _, string script) in scripts)
                     {
-                        frame.ExecuteJavaScript(script, frame.Url ?? string.Empty, 0);
+                        frame.ExecuteJavaScript(script, /*frame.Url ??*/ string.Empty, 0);
                     }
                 }
             }
