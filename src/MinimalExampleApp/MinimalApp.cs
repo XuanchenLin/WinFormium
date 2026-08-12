@@ -1,4 +1,4 @@
-﻿using WinFormium;
+using WinFormium;
 
 namespace MinimalExampleApp;
 
@@ -22,12 +22,11 @@ internal class MinimalApp : AppStartup
 
     protected override AppCreationAction? OnApplicationStartup(StartupSettings settings)
     {
-        //#if !DEBUG
-        //        var startup = new StartupWindow();
-        //        startup.ShowDialog();
-        //#endif
+        #if !DEBUG
         var startup = new StartupWindow();
         startup.ShowDialog();
+        #endif
+
         return settings.UseMainWindow(new MainWindow());
     }
 

@@ -1,4 +1,4 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 using WinFormium;
 using WinFormium.JavaScript;
@@ -390,6 +390,7 @@ public class MainWindow : Formium
     public MainWindow()
     {
         Url = $"{DEMO_HOST_ADDR}/home/";
+        //Url = "http://124.221.85.220:50002/res/eleui/gkj/index.html";
 
         StartPosition = FormStartPosition.CenterScreen;
         Icon = ExampleIcon;

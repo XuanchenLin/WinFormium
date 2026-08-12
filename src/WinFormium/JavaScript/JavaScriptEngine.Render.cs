@@ -20,8 +20,9 @@ internal partial class JavaScriptEngine
     }
     public override void ContextCreatedOnRenderSide(CefBrowser browser, CefFrame frame, CefV8Context context)
     {
+        var url = frame?.Url ?? string.Empty;
 
-        if(frame.IsMain && frame.IsValid && !frame.Url.StartsWith("devtools://"))
+        if (frame is not null && frame.IsMain && frame.IsValid && !url.StartsWith("devtools://"))
         {
             var response = Request(new ProcessRequest
             {
