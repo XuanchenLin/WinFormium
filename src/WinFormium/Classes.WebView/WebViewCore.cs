@@ -33,6 +33,8 @@ internal partial class WebViewCore
         /// </summary>
         public CefBrowserHost BrowserHost { get; }
 
+        public bool IsDisposed { get; private set; } = false;
+
         /// <summary>
         /// Gets the host form that contains the DevTools window.
         /// </summary>
@@ -80,6 +82,11 @@ internal partial class WebViewCore
 
             DevToolsForm.HandleCreated += WindowHandleCreated;
             BrowserHost = browserHost;
+
+            DevToolsForm.FormClosed += (_, _) =>
+            {
+                IsDisposed = true;
+            };
         }
 
         /// <summary>
@@ -110,6 +117,8 @@ internal partial class WebViewCore
         {
             return false;
         }
+
+
 
         /// <inheritdoc/>
         void ILifeSpanHandler.OnAfterCreated(CefBrowser browser)
@@ -684,6 +693,9 @@ internal partial class WebViewCore
         }
     }
 
+
+    DevToolClient? _devToolClient = null;
+
     /// <summary>
     /// Shows the DevTools window for the browser.
     /// </summary>
@@ -697,9 +709,15 @@ internal partial class WebViewCore
             return;
         }
 
-        var devTools = new DevToolClient(this);
 
-        devTools.Show();
+        if(_devToolClient is null || _devToolClient.IsDisposed)
+        {
+            _devToolClient = new DevToolClient(this);
+        }
+
+        _devToolClient.Show();
+
+
     }
 
     /// <summary>
