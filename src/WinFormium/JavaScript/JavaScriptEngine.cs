@@ -253,7 +253,6 @@ internal partial class JavaScriptEngine : ProcessCommunicationBridgeHandler
             };
         }
 
-
         if (args.Asynconous)
         {
             var promise = args.Promise;
@@ -263,9 +262,6 @@ internal partial class JavaScriptEngine : ProcessCommunicationBridgeHandler
             {
                 return new ProcessResponse { Success = false, ExceptionMessage = "[WinFormium] CallNativeObjectMethod returned promise but it is null." };
             }
-
-            args.ReturnValue = $"{promise.GenerateCallId()}";
-
 
             promise.CallRemoteResovle += (json) =>
             {
@@ -286,6 +282,11 @@ internal partial class JavaScriptEngine : ProcessCommunicationBridgeHandler
                     Data = reason
                 }.ToCefProcessMessage());
             };
+
+            args.ReturnValue = $"{promise.GenerateCallId()}";
+
+            promise.IsPromiseContextReady = true;
+
         }
 
 

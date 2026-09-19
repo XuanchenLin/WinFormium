@@ -1,4 +1,4 @@
-﻿// This file is part of the WinFormium project.
+// This file is part of the WinFormium project.
 // Copyright (c) 2025 Xuanchen Lin all rights reserved.
 // This project is licensed under the LGPL License.
 // See the LICENSE file in the project root for more information.
@@ -14,6 +14,37 @@ public class JavaScriptPromiseContext
     /// Stores the unique identifier for the remote call associated with this promise.
     /// </summary>
     private string? _remoteCallId = null;
+
+    internal bool IsPromiseContextReady
+    {
+        get;
+        set
+        {
+            field = value;
+
+            if (_resolvesShouldBeCalledWhenContextReady is not null)
+            {
+                
+                _resolvesShouldBeCalledWhenContextReady.Invoke();
+            }
+            else if(_rejectsShouldBeCalledWhenContextReady is not null)
+            {
+                _rejectsShouldBeCalledWhenContextReady.Invoke();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the action to invoke when the promise is resolved, if the context is not yet ready.
+    /// </summary>
+    private Action? _resolvesShouldBeCalledWhenContextReady;
+
+    /// <summary>
+    /// Gets or sets the action to invoke when the promise is rejected, if the context is not yet ready.
+    /// </summary>
+    private Action? _rejectsShouldBeCalledWhenContextReady;
+
+
 
     /// <summary>
     /// Generates and returns a unique call identifier for the remote promise invocation.
@@ -52,13 +83,25 @@ public class JavaScriptPromiseContext
         ObjectId = objectId;
     }
 
+    
+
     /// <summary>
     /// Resolves the promise with an optional return value in JSON format.
     /// </summary>
     /// <param name="returnValueAsJson">The return value as a JSON string, or <c>null</c> if not applicable.</param>
     public void Resolve(string? returnValueAsJson = null)
     {
-        CallRemoteResovle?.Invoke(returnValueAsJson);
+        if(IsPromiseContextReady)
+        {
+            CallRemoteResovle?.Invoke(returnValueAsJson);
+        }
+        else
+        {
+            _resolvesShouldBeCalledWhenContextReady = () =>
+            {
+                CallRemoteResovle?.Invoke(returnValueAsJson);
+            };
+        }
     }
 
     /// <summary>
@@ -67,7 +110,17 @@ public class JavaScriptPromiseContext
     /// <param name="reason">The reason for rejection, or <c>null</c> if not specified.</param>
     public void Reject(string? reason = null)
     {
-        CallRemoteReject?.Invoke(reason);
+        if(IsPromiseContextReady)
+        {
+            CallRemoteReject?.Invoke(reason);
+        }
+        else
+        {
+            _rejectsShouldBeCalledWhenContextReady = () =>
+            {
+                CallRemoteReject?.Invoke(reason);
+            };
+        }
     }
 
     /// <summary>

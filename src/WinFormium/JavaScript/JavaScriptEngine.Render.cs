@@ -97,7 +97,7 @@ internal partial class JavaScriptEngine
                 using (CefObjectTracker.StartTracking())
                 using (context.EnterOrFail())
                 {
-                    var promise = promiseData.Promise;
+                    using var promise = promiseData.Promise;
 
                     if (message.Resolve)
                     {
@@ -117,7 +117,7 @@ internal partial class JavaScriptEngine
                         promise.RejectPromise(message.Data ?? string.Empty);
                     }
 
-                    promise.Dispose();
+                    //promise.Dispose();
                 }
             }));
         }
