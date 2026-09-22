@@ -1,4 +1,4 @@
-﻿// This file is part of the WinFormium project.
+// This file is part of the WinFormium project.
 // Copyright (c) 2025 Xuanchen Lin all rights reserved.
 // This project is licensed under the LGPL License.
 // See the LICENSE file in the project root for more information.
@@ -29,6 +29,11 @@ public sealed class AppBuilder
     /// Gets the process type (Browser or Renderer) for the current process.
     /// </summary>
     internal CefProcessId ProcessType { get; }
+
+    /// <summary>
+    /// Gets the process type (Browser or Renderer) for the current process.
+    /// </summary>
+    public CefProcessId GetProcessType() => ProcessType;
 
     /// <summary>
     /// Gets the application data directory path.
