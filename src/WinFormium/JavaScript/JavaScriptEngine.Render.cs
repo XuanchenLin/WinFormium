@@ -73,11 +73,17 @@ internal partial class JavaScriptEngine
         {
             foreach (var promiseHolderEntry in FunctionApplyPendingPromises.ToArray())
             {
-                if (promiseHolderEntry.Value.V8Context.IsSame(context))
-                {
-                    FunctionApplyPendingPromises.TryRemove(promiseHolderEntry.Key, out var dummy);
-                    ReleasePromiseHolder(promiseHolderEntry.Value);
-                }
+
+                //TODO:这里会报空引用
+                //if (promiseHolderEntry.Value.V8Context. || promiseHolderEntry.Value.V8Context?.IsSame(context) == true)
+                //{
+                //    FunctionApplyPendingPromises.TryRemove(promiseHolderEntry.Key, out var dummy);
+                //    ReleasePromiseHolder(promiseHolderEntry.Value);
+                //}
+
+
+                FunctionApplyPendingPromises.TryRemove(promiseHolderEntry.Key, out var dummy);
+                ReleasePromiseHolder(promiseHolderEntry.Value);
             }
         }
     }
@@ -110,7 +116,7 @@ internal partial class JavaScriptEngine
                             value = result.JsonStringToCefV8Value(context);
                         }
 
-                        promise.ResolvePromise(value?? CefV8Value.CreateUndefined());
+                        promise.ResolvePromise(value ?? CefV8Value.CreateUndefined());
                     }
                     else
                     {
