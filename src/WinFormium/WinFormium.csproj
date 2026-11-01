@@ -29,7 +29,7 @@
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)'=='Release'">
-        <Version>1.2.109.10</Version>
+        <Version>1.2.109.11</Version>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <IncludeSymbols>true</IncludeSymbols>
@@ -74,8 +74,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="System.Text.Json" Version="10.0.12" />
-        <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.335">
+        <PackageReference Include="System.Text.Json" Version="10.0.14" />
+        <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.367">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
